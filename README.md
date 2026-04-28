@@ -33,3 +33,16 @@ Baseline tips:
 - Treat `segment_id` and `horizon_d` as categorical
 - Calibrate probabilities (LogLoss-heavy metric)
 
+### Why this is interesting (and non-trivial)
+- **Shape risk, not level**: twists are about relative moves across maturities (microstructure + macro), not “rates up/down.”
+- **Feature leakage traps**: small lookahead mistakes in rolling features make backtests look unrealistically good—this repo avoids that, and your validation should too.
+- **Slice pressure**: `slice_high_rate_vol` emphasizes stressed regimes where probability calibration tends to break.
+
+### Target intuition
+The label answers:
+> “Will the curve experience an unusually large *twist* within the next 5–10 trading days?”
+
+### Source
+U.S. Treasury Daily Yield Curve Rates:
+- `https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView`
+
